@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 
 project(
-  hello_bare
+  bare_bindings
   LANGUAGES C CXX
 )
 
@@ -18,14 +18,14 @@ add_bare_bundle(
 )
 
 add_library(
-  hello_bare
+  bare_bindings
   STATIC
-  bare/hello-bare.cc
+  bare/bare-bindings.cc
   bare/bundle.js.h
 )
 
 set_target_properties(
-  hello_bare
+  bare_bindings
   PROPERTIES
   C_STANDARD 11
   CXX_STANDARD 20
@@ -33,22 +33,22 @@ set_target_properties(
 )
 
 target_include_directories(
-  hello_bare
+  bare_bindings
   PRIVATE
   $<TARGET_PROPERTY:bare,INTERFACE_INCLUDE_DIRECTORIES>
   vendor/concurrentqueue
 )
 
 target_link_libraries(
-  hello_bare
+  bare_bindings
   PRIVATE
   $<LINK_LIBRARY:WHOLE_ARCHIVE,bare_static>
 )
 
 # add native addons objects to the library
 if(target MATCHES "ios" OR target MATCHES "android")
-  link_bare_module(hello_bare bare-pipe)
-  link_bare_module(hello_bare bare-tty)
+  link_bare_module(bare_bindings bare-pipe)
+  link_bare_module(bare_bindings bare-tty)
 endif()
 
 if(target MATCHES "android")
@@ -66,7 +66,7 @@ endif()
 if(DEFINED artefacts)
 install(
   FILES
-  $<TARGET_FILE:hello_bare>
+  $<TARGET_FILE:bare_bindings>
   $<TARGET_FILE:bare_static>
   ${v8}
   ${js}

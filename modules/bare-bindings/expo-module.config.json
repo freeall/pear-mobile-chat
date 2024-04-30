@@ -1,0 +1,9 @@
+{
+  "platforms": ["ios", "android", "web"],
+  "ios": {
+    "modules": ["BareBindingsModule"]
+  },
+  "android": {
+    "modules": ["to.holepunch.hellopear.BareBindingsModule"]
+  }
+}

@@ -1,5 +1,5 @@
-#ifndef HELLO_BARE_H
-#define HELLO_BARE_H
+#ifndef BARE_BINDINGS_H
+#define BARE_BINDINGS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,4 +21,4 @@ void hb_platform_log(const char* msg);
 }
 #endif
 
-#endif // HELLO_BARE_H
+#endif // BARE_BINDINGS_H

@@ -6,15 +6,15 @@ import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 
 @Suppress("unused")
-class HelloBareModule : Module() {
+class BareBindingsModule : Module() {
   override fun definition() = ModuleDefinition {
-    Name("HelloBare")
+    Name("BareBindings")
 
     Function("install") {
       val reactContext = appContext.reactContext as ReactApplicationContext
       val catalyst = reactContext.catalystInstance as CatalystInstanceImpl
 
-      HelloBare.install(
+      BareBindings.install(
         reactContext.javaScriptContextHolder!!.get(),
         catalyst.jsCallInvokerHolder)
     }

@@ -3,10 +3,10 @@
 #include <fbjni/fbjni.h>
 #include <ReactCommon/CallInvokerHolder.h>
 
-#include <hello-bare-jsi.hpp>
+#include <bare-bindings-jsi.hpp>
 
-struct HelloBare: jni::JavaClass<HelloBare> {
-    static constexpr auto kJavaDescriptor = "Lto/holepunch/hellopear/HelloBare;";
+struct BareBindings: jni::JavaClass<BareBindings> {
+    static constexpr auto kJavaDescriptor = "Lto/holepunch/hellopear/BareBindings;";
 
     static void install(jni::alias_ref<jni::JClass>,
             jlong jsi_ptr,
@@ -43,18 +43,18 @@ struct HelloBare: jni::JavaClass<HelloBare> {
               HB_GLOBAL,
               jsi::Object::createFromHostObject(
                       *rt,
-                      std::make_shared<JsiHelloBareHostObject>(*rt)));
+                      std::make_shared<JsiBareBindingsHostObject>(*rt)));
     }
 
     static void registerNatives() {
       javaClassStatic()->registerNatives({
-        makeNativeMethod("install", HelloBare::install),
+        makeNativeMethod("install", BareBindings::install),
       });
     }
 };
 
 jint JNI_OnLoad(JavaVM* vm, void*) {
   return jni::initialize(vm, [] {
-      HelloBare::registerNatives();
+      BareBindings::registerNatives();
   });
 }

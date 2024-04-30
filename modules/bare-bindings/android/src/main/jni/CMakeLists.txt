@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.22.1)
 
 set(
   PACKAGE_NAME
-  hello_bare_jsi
+  bare_bindings_jsi
 )
 project(
   ${PACKAGE_NAME}
@@ -12,7 +12,7 @@ project(
 add_library(
   ${PACKAGE_NAME}
   SHARED
-  hello-bare.cc
+  bare-bindings.cc
 )
 
 target_include_directories(
@@ -61,11 +61,11 @@ set_target_properties(
   ${HB_LIBS_ARCH}/libbare.a
 )
 
-add_library(hello-bare STATIC IMPORTED)
+add_library(bare-bindings STATIC IMPORTED)
 set_target_properties(
-  hello-bare
+  bare-bindings
   PROPERTIES IMPORTED_LOCATION
-  ${HB_LIBS_ARCH}/libhello_bare.a
+  ${HB_LIBS_ARCH}/libbare_bindings.a
 )
 
 find_package(ReactAndroid REQUIRED CONFIG)
@@ -86,7 +86,7 @@ target_link_libraries(
   c++
   js
   -Wl,--whole-archive bare -Wl,--no-whole-archive
-  -Wl,--whole-archive hello-bare -Wl,--no-whole-archive
+  -Wl,--whole-archive bare-bindings -Wl,--no-whole-archive
   # android
   android
   ${android-log}

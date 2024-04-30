@@ -2,10 +2,10 @@ package to.holepunch.hellopear;
 
 import com.facebook.react.turbomodule.core.CallInvokerHolderImpl;
 
-public final class HelloBare {
+public final class BareBindings {
   static {
     try {
-      System.loadLibrary("hello_bare_jsi");
+      System.loadLibrary("bare_bindings_jsi");
     } catch (Exception ignored) {
     }
   }

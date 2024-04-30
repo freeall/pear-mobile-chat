@@ -38,7 +38,7 @@ process.on('unhandledRejection', (ex) => {
 
 const consoleProxy = new Console({
   colors: false,
-  stdout: HelloBare.sendLog,
-  stderr: HelloBare.sendLog
+  stdout: BareBindings.sendLog,
+  stderr: BareBindings.sendLog
 })
 globalThis.console = consoleProxy

@@ -14,10 +14,10 @@
 
 #include <concurrentqueue.h>
 
-#include "hello-bare.h"
+#include "bare-bindings.h"
 #include "bundle.js.h"
 
-#define RUNTIME_GLOBAL_NAME "HelloBare"
+#define RUNTIME_GLOBAL_NAME "BareBindings"
 #define PEAR "🍐 "
 
 typedef std::function<void(void)> hb_looper_queue_item_t;
@@ -191,7 +191,7 @@ void hb_init(hb_on_message on_message, hb_on_log on_log, void* data) {
       }
 
       uv_buf_t source = uv_buf_init((char*)bundle, bundle_len);
-      err = bare_run(bare, "/hello-bare.bundle", &source);
+      err = bare_run(bare, "/bare-bindings.bundle", &source);
       assert(err == 0);
 
       int exit_code;
@@ -271,6 +271,6 @@ void hb_platform_log(const char* str) {
 #if defined(__APPLE__)
   os_log(hb.logger, "%{public}s", msg);
 #elif defined(__ANDROID__)
-  __android_log_print(ANDROID_LOG_DEBUG, "hello-bare", "%s", msg);
+  __android_log_print(ANDROID_LOG_DEBUG, "bare-bindings", "%s", msg);
 #endif
 }

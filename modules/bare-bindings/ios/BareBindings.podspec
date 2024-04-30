@@ -1,7 +1,7 @@
 hb_root = File.join(__dir__, "..", "..", "..", "bare-libs", "ios")
 
 Pod::Spec.new do |s|
-  s.name           = 'HelloBare'
+  s.name           = 'BareBindings'
   s.version        = '1.0.0'
   s.summary        = 'A sample project summary'
   s.description    = 'A sample project description'
@@ -29,6 +29,6 @@ Pod::Spec.new do |s|
     'HB_ROOT[sdk=iphoneos*]' =>  "#{hb_root}/iphoneos",
     'HB_ROOT[sdk=iphonesimulator*]' =>  "#{hb_root}/iphonesimulator",
     'LIBRARY_SEARCH_PATHS' => "$(inherited) $(HB_ROOT)",
-    'OTHER_LDFLAGS' => "$(inherited) -ObjC -lv8 -ljs $(HB_ROOT)/misc/libc++.a -force_load $(HB_ROOT)/libhello_bare.a -force_load $(HB_ROOT)/libbare.a",
+    'OTHER_LDFLAGS' => "$(inherited) -ObjC -lv8 -ljs $(HB_ROOT)/misc/libc++.a -force_load $(HB_ROOT)/libbare_bindings.a -force_load $(HB_ROOT)/libbare.a",
   }
 end

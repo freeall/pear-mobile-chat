@@ -3,8 +3,8 @@ const ce = require('compact-encoding')
 
 module.exports = class WorkerRpcHandler {
   constructor ({ createRoom }) {
-    const rpc = new RPC(HelloBare.sendMessage)
-    HelloBare.onMessage = rpc.recv.bind(rpc)
+    const rpc = new RPC(BareBindings.sendMessage)
+    BareBindings.onMessage = rpc.recv.bind(rpc)
 
     rpc.register(0, {
       request: ce.none,

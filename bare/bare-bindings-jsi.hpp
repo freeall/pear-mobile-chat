@@ -3,7 +3,7 @@
 #include <jsi/jsi.h>
 #include <ReactCommon/CallInvoker.h>
 
-#include <hello-bare.h>
+#include <bare-bindings.h>
 
 using namespace facebook;
 
@@ -22,7 +22,7 @@ using namespace facebook;
 #define JSI_TYPEDARRAY_BYTELENGTH(name)\
   auto name##_byteLength = static_cast<size_t>(name##_obj.getProperty(rt, "byteLength").asNumber());
 
-#define HB_GLOBAL "HelloBare"
+#define HB_GLOBAL "BareBindings"
 #define HB_GLOBAL_SEND_MESSAGE "sendMessage"
 #define HB_GLOBAL_ON_MESSAGE "onMessage"
 #define HB_GLOBAL_ON_LOG "onLog"
@@ -58,13 +58,13 @@ private:
   std::vector<uint8_t> v_;
 };
 
-class JsiHelloBareHostObject: public jsi::HostObject {
+class JsiBareBindingsHostObject: public jsi::HostObject {
   std::shared_ptr<jsi::Object> obj_;
-  
+
 public:
-  JsiHelloBareHostObject(jsi::Runtime& rt):
+  JsiBareBindingsHostObject(jsi::Runtime& rt):
     obj_(std::make_shared<jsi::Object>(rt.global().getPropertyAsFunction(rt, "Object").callAsConstructor(rt).getObject(rt))) {}
-  
+
   std::vector<jsi::PropNameID> getPropertyNames(jsi::Runtime& rt) override {
     std::vector<jsi::PropNameID> props;
     props.push_back(jsi::PropNameID::forUtf8(rt, std::string(HB_GLOBAL_SEND_MESSAGE)));
@@ -72,17 +72,17 @@ public:
     props.push_back(jsi::PropNameID::forUtf8(rt, std::string(HB_GLOBAL_ON_LOG)));
     return props;
   }
-  
+
   jsi::Value get(jsi::Runtime &rt, jsi::PropNameID const &name) override {
     auto prop_name = name.utf8(rt);
-    
+
     if (prop_name == HB_GLOBAL_SEND_MESSAGE) {
       JSI_HOSTOBJECT_FN(1, {
         JSI_TYPEDARRAY(msg, arguments[0]);
         JSI_TYPEDARRAY_BYTELENGTH(msg);
-        
+
         hb_send_message(msg_data, msg_byteLength);
-        
+
         return jsi::Value::undefined();
       });
     }
@@ -92,20 +92,20 @@ public:
 
     return jsi::Value::undefined();
   }
-  
+
   void set(jsi::Runtime &rt, jsi::PropNameID const &name, const jsi::Value &value) override {
     auto prop_name = name.utf8(rt);
-    
-    if (prop_name == HB_GLOBAL_ON_MESSAGE || 
+
+    if (prop_name == HB_GLOBAL_ON_MESSAGE ||
         prop_name == HB_GLOBAL_ON_LOG) {
       obj_->setProperty(rt, name, value);
       return;
     }
-    
-    throw jsi::JSError(rt, "Trying to set a wrong HelloBare property.");
+
+    throw jsi::JSError(rt, "Trying to set a wrong BareBindings property.");
   }
 
-  ~JsiHelloBareHostObject() override {
+  ~JsiBareBindingsHostObject() override {
     void* data;
     hb_get_data(&data);
     if (data) {
@@ -119,7 +119,7 @@ static void on_message(void* buf, size_t len, void* data) {
   if (!data) {
     return;
   }
-  
+
   rn_data_t* rn_data = (rn_data_t*)data;
   auto buffer = std::make_shared<JsiMutableVectorBuffer>((uint8_t*)buf, len);
   rn_data->call_invoker->invokeAsync([rn_data, buffer]() {

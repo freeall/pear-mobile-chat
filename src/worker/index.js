@@ -1,7 +1,7 @@
 require('../../bare/runtime')
 
 // forward bare's logs to console as early as possible
-HelloBare.onLog = console.log
+BareBindings.onLog = console.log
 
 const WorkerRpcHandler = require('../rpc/worker-handler.js')
 const rpcHandler = new WorkerRpcHandler({ createRoom })
@@ -21,4 +21,4 @@ setInterval(async () => {
 setInterval(() => { }, 2000)
 
 // tell app we're ready
-HelloBare.onReady()
+BareBindings.onReady()

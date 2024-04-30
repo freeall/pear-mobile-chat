@@ -4,7 +4,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HelloBare : NSObject
+@interface BareBindings : NSObject
 
 +(instancetype)sharedInstance;
 -(instancetype)init UNAVAILABLE_ATTRIBUTE;

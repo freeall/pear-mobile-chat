@@ -1,9 +1,9 @@
-#import "HelloBare.h"
+#import "BareBindings.h"
 
 #import <React/RCTBridge.h>
 #import <ReactCommon/RCTTurboModule.h>
 
-#import <hello-bare-jsi.hpp>
+#import <bare-bindings-jsi.hpp>
 
 @interface RCTBridge (KeetCore)
 
@@ -11,14 +11,14 @@
 
 @end
 
-@implementation HelloBare
+@implementation BareBindings
 
 +(instancetype)sharedInstance
 {
-  static HelloBare* sharedInstance;
+  static BareBindings* sharedInstance;
   static dispatch_once_t once;
   dispatch_once(&once, ^{
-    sharedInstance = [[HelloBare alloc] init];
+    sharedInstance = [[BareBindings alloc] init];
   });
   return sharedInstance;
 }
@@ -28,8 +28,8 @@
   if (!bridge) {
     return;
   }
-  
-  auto rt = [bridge respondsToSelector:@selector(runtime)] 
+
+  auto rt = [bridge respondsToSelector:@selector(runtime)]
     ? reinterpret_cast<jsi::Runtime*>(bridge.runtime)
     : nullptr;
   if (!rt) {
@@ -38,7 +38,7 @@
 
   static bool installed = false;
   bool already_installed = installed;
-  
+
   rn_data_t* rn_data = (rn_data_t*)malloc(sizeof(rn_data_t));
   rn_data->rt = rt;
   rn_data->call_invoker = bridge.jsCallInvoker.get();
@@ -61,7 +61,7 @@
   rt->global()
     .setProperty(*rt,
                  HB_GLOBAL,
-                 jsi::Object::createFromHostObject(*rt, std::make_shared<JsiHelloBareHostObject>(*rt)));
+                 jsi::Object::createFromHostObject(*rt, std::make_shared<JsiBareBindingsHostObject>(*rt)));
 }
 
 @end
