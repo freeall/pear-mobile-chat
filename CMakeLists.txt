@@ -12,7 +12,7 @@ bare_target(target)
 add_subdirectory(vendor/bare EXCLUDE_FROM_ALL)
 
 add_bare_bundle(
-  ENTRY bare/main.js
+  ENTRY src/worker/index.js
   OUT bare/bundle.js.h
   CONFIG bare/bundle.config.js
 )

@@ -1,4 +1,4 @@
-# pear-expo-hello-world
+# pear-mobile-chat
 
 A Pear Runtime `hello world` using [Bare](https://github.com/holepunchto/bare) with [Expo](https://docs.expo.dev/).
 

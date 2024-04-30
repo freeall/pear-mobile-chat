@@ -1,10 +1,10 @@
 {
-  "name": "pear-expo-hello-world",
+  "name": "pear-mobile-chat",
   "version": "1.0.0",
   "bin": {
     "hello-pear": "./bin/hello-pear.js"
   },
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "src/ui/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "pear-expo-hello-world",
-    "slug": "pear-expo-hello-world",
+    "name": "pear-mobile-chat",
+    "slug": "pear-mobile-chat",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
